@@ -4,7 +4,6 @@
   padding: 2rem;
   text-align: center;
 }
-
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -17,7 +16,6 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
-
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -26,17 +24,82 @@
     transform: rotate(360deg);
   }
 }
-
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
 }
-
 .card {
   padding: 2em;
 }
-
 .read-the-docs {
   color: #888;
+}
+table {
+  border-collapse: collapse; /* Прибирає подвійні межі між клітинками */
+  width: 100%;/* Задає ширину таблиці на весь контейнер */
+}
+td,th {
+  padding: 10px;/* Внутрішній відступ в клітинках */
+  text-align: left; /* Вирівнювання тексту вліво */
+}
+tr {
+  margin-bottom: 10px; /* Відступ між рядками таблиці */
+}
+
+
+/* Стилі для поля пошуку */
+.search-input {
+  width: 300px;
+  /* Ширина поля вводу */
+  padding: 0.5rem;
+  /* Внутрішній відступ */
+  margin-bottom: 1rem;
+  /* Відступ знизу */
+  border: 1px solid #ccc;
+  /* Сіра межа */
+  border-radius: 4px;
+  /* Скруглені кути */
+}
+
+/* Стилі для форми додавання задач */
+.add-todo-form {
+  display: flex;
+  /* Використовуємо флекс-контейнер */
+  gap: 1rem;
+  /* Відстань між елементами */
+  margin-bottom: 2rem;
+  /* Відступ знизу */
+}
+
+/* Стилі для кнопки додавання задач */
+.add-todo-button {
+  padding: 0.5rem 1rem;
+  /* Внутрішні відступи */
+  border: none;
+  /* Без межі */
+  background-color: #4caf50;
+  /* Зелений фон */
+  color: white;
+  /* Білий текст */
+  border-radius: 4px;
+  /* Скруглені кути */
+  cursor: pointer;
+  /* Вказівник миші у вигляді руки */
+}
+
+/* Стилі для кнопки скасування */
+.delete-button {
+  padding: 0.5rem 1rem;
+  /* Внутрішні відступи */
+  border: none;
+  /* Без межі */
+  background-color: #f44336;
+  /* Червоний фон */
+  color: white;
+  /* Білий текст */
+  border-radius: 4px;
+  /* Скруглені кути */
+  cursor: pointer;
+  /* Вказівник миші у вигляді руки */
 }

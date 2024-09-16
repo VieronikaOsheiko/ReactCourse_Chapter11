@@ -4,7 +4,7 @@ import React from "react";
 const SearchInput = ({ searchTerm, onSearchChange }) => {
   return (
     <input
-      className="search-input" /* Додаємо клас для стилізації */
+      className="search-input" 
       type="text"
       placeholder="Search"
       value={searchTerm}

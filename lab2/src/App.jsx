@@ -4,12 +4,12 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import ToDoTable from "./components/ToDoTable";
 import AddToDOComponent from "./components/AddToDOComponent";
-import SearchInput from "./components/SearchInput";  // Імпортуємо компонент для пошуку
+import SearchInput from "./components/SearchInput";  
 
 function App() {
   const [toDos, setToDos] = useState([]);
   const [newToDo, setNewToDo] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");  // Стейт для пошукового терміну
+  const [searchTerm, setSearchTerm] = useState("");  
 
   function handleNewTitleChange(event) {
     setNewToDo({ id: Math.random(), title: event.target.value });

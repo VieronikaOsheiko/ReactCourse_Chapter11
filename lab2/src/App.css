@@ -36,70 +36,41 @@
   color: #888;
 }
 table {
-  border-collapse: collapse; /* Прибирає подвійні межі між клітинками */
-  width: 100%;/* Задає ширину таблиці на весь контейнер */
+  border-collapse: collapse; 
+  width: 100%;
 }
 td,th {
-  padding: 10px;/* Внутрішній відступ в клітинках */
-  text-align: left; /* Вирівнювання тексту вліво */
+  padding: 10px;
+  text-align: left; 
 }
 tr {
-  margin-bottom: 10px; /* Відступ між рядками таблиці */
+  margin-bottom: 10px; 
 }
-
-
-/* Стилі для поля пошуку */
 .search-input {
   width: 300px;
-  /* Ширина поля вводу */
   padding: 0.5rem;
-  /* Внутрішній відступ */
   margin-bottom: 1rem;
-  /* Відступ знизу */
   border: 1px solid #ccc;
-  /* Сіра межа */
   border-radius: 4px;
-  /* Скруглені кути */
 }
-
-/* Стилі для форми додавання задач */
 .add-todo-form {
   display: flex;
-  /* Використовуємо флекс-контейнер */
   gap: 1rem;
-  /* Відстань між елементами */
   margin-bottom: 2rem;
-  /* Відступ знизу */
 }
-
-/* Стилі для кнопки додавання задач */
 .add-todo-button {
   padding: 0.5rem 1rem;
-  /* Внутрішні відступи */
   border: none;
-  /* Без межі */
   background-color: #4caf50;
-  /* Зелений фон */
   color: white;
-  /* Білий текст */
   border-radius: 4px;
-  /* Скруглені кути */
   cursor: pointer;
-  /* Вказівник миші у вигляді руки */
 }
-
-/* Стилі для кнопки скасування */
 .delete-button {
   padding: 0.5rem 1rem;
-  /* Внутрішні відступи */
   border: none;
-  /* Без межі */
   background-color: #f44336;
-  /* Червоний фон */
   color: white;
-  /* Білий текст */
   border-radius: 4px;
-  /* Скруглені кути */
   cursor: pointer;
-  /* Вказівник миші у вигляді руки */
 }

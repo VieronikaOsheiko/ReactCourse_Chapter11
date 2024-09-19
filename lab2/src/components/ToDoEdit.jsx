@@ -9,8 +9,8 @@ const ToDoEdit = ({ toDo, onSave, onCancel }) => {
       alert("Please enter a valid title.");
       return;
     }
-    const updatedToDo = { ...toDo, title }; // Оновлюємо лише назву
-    onSave(updatedToDo); // Викликаємо функцію збереження
+    const updatedToDo = { ...toDo, title };
+    onSave(updatedToDo);
   }
 
   return (

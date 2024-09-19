@@ -3,7 +3,7 @@ import { v4 } from "uuid";
 import SearchInput from './SearchInput';
 import AddToDOComponent from './AddToDOComponent';
 import ToDoTable from './ToDoTable';
-import ToDoEdit from './ToDoEdit'; // Імпорт компоненти редагування
+import ToDoEdit from './ToDoEdit';
 
 const ToDoContainer = () => {
   const [toDos, setToDos] = useState([]);
@@ -20,7 +20,7 @@ const ToDoContainer = () => {
     event.preventDefault();
     if (newToDo && newToDo.title.trim() !== "") {
       setToDos([...toDos, { ...newToDo, id: v4() }]);
-      setNewToDo({ title: '' }); // Очищуємо форму після додавання
+      setNewToDo({ title: '' });
     } else {
       alert("Please enter a task title.");
     }
@@ -31,18 +31,18 @@ const ToDoContainer = () => {
   }
 
   function handleEdit(toDo) {
-    setSelectedToDo(toDo); // Встановлюємо вибране завдання
-    setIsEditing(true);    // Увімкнути режим редагування
+    setSelectedToDo(toDo);
+    setIsEditing(true);
   }
 
   function handleSave(updatedToDo) {
-    setToDos(toDos.map(td => td.id === updatedToDo.id ? updatedToDo : td)); // Оновлюємо список завдань
-    setIsEditing(false); // Вимикаємо режим редагування
+    setToDos(toDos.map(td => td.id === updatedToDo.id ? updatedToDo : td));
+    setIsEditing(false);
     setSelectedToDo(null);
   }
 
   function handleCancelEdit() {
-    setIsEditing(false); // Вимикаємо режим редагування
+    setIsEditing(false);
     setSelectedToDo(null);
   }
 
@@ -63,7 +63,6 @@ const ToDoContainer = () => {
         onSubmit={handleSubmit}
       />
       <ToDoTable toDos={filteredToDos} onDelete={handleDelete} onEdit={handleEdit} />
-      
       {isEditing && selectedToDo && (
         <ToDoEdit toDo={selectedToDo} onSave={handleSave} onCancel={handleCancelEdit} />
       )}

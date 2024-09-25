@@ -1,20 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { v4 } from "uuid";
-import SearchInput from './SearchInput';
-import AddToDoComponent from './AddToDoComponent';
-import ToDoTable from './ToDoTable';
-import ToDoEdit from './ToDoEdit';
+import React, { useState } from "react";
+import SearchInput from "./SearchInput";
+import AddToDoComponent from "./AddToDoComponent";
+import ToDoTable from "./ToDoTable";
+import ToDoEdit from "./ToDoEdit";
+import useGetAllToDo from "./Hooks/UseToDos.js";
 
 const ToDoContainer = () => {
-
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos")
-      .then((response) => response.json())
-      .then((json) => setToDoList(json));
-  }, []);
-
-  const [toDos, setToDos] = useState([]);
-  const [newToDo, setNewToDo] = useState({ title: '' });
+  const { isLoading, data, setData } = useGetAllToDo(); // Get data from API
+  const [newToDo, setNewToDo] = useState({ title: "" });
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedToDo, setSelectedToDo] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -26,15 +19,15 @@ const ToDoContainer = () => {
   function handleSubmit(event) {
     event.preventDefault();
     if (newToDo && newToDo.title.trim() !== "") {
-      setToDos([...toDos, { ...newToDo, id: v4() }]);
-      setNewToDo({ title: '' });
+      setData([...data, { ...newToDo, id: v4() }]); // Add to the API data
+      setNewToDo({ title: "" });
     } else {
       alert("Please enter a task title.");
     }
   }
 
   function handleDelete(id) {
-    setToDos(toDos.filter(toDo => toDo.id !== id));
+    setData(data.filter((toDo) => toDo.id !== id)); // Remove from API data
   }
 
   function handleEdit(toDo) {
@@ -43,7 +36,7 @@ const ToDoContainer = () => {
   }
 
   function handleSave(updatedToDo) {
-    setToDos(toDos.map(td => td.id === updatedToDo.id ? updatedToDo : td));
+    setData(data.map((td) => (td.id === updatedToDo.id ? updatedToDo : td)));
     setIsEditing(false);
     setSelectedToDo(null);
   }
@@ -57,21 +50,36 @@ const ToDoContainer = () => {
     setSearchTerm(event.target.value);
   }
 
-  const filteredToDos = toDos.filter(toDo =>
+  const filteredToDos = data.filter((toDo) =>
     toDo.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
-      <SearchInput searchTerm={searchTerm} onSearchChange={handleSearchChange} />
+      <SearchInput
+        searchTerm={searchTerm}
+        onSearchChange={handleSearchChange}
+      />
       <AddToDoComponent
         title={newToDo?.title}
         onTitleChange={handleNewTitleChange}
         onSubmit={handleSubmit}
       />
-      <ToDoTable toDos={filteredToDos} onDelete={handleDelete} onEdit={handleEdit} />
+      <ToDoTable
+        toDos={filteredToDos}
+        onDelete={handleDelete}
+        onEdit={handleEdit}
+      />
       {isEditing && selectedToDo && (
-        <ToDoEdit toDo={selectedToDo} onSave={handleSave} onCancel={handleCancelEdit} />
+        <ToDoEdit
+          toDo={selectedToDo}
+          onSave={handleSave}
+          onCancel={handleCancelEdit}
+        />
       )}
     </>
   );

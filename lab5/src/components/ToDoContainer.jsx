@@ -4,13 +4,12 @@ import AddToDoComponent from "./AddToDoComponent";
 import SearchInput from "./SearchInput";
 import useToDos from "./hooks/useToDos.js";
 import Loading from "./Loading";
-
+import ToDoEdit from "./ToDoEdit";
 const ToDoContainer = () => {
   const { isLoading, data: toDos, setData: setToDos } = useToDos();
   const [newToDo, setNewToDo] = useState({ title: "" });
   const [searchTerm, setSearchTerm] = useState("");
-  const [editingToDo, setEditingToDo] = useState(null);
-
+  const [editingToDo, setEditingToDo] = useState(null); 
   function handleNewTitleChange(event) {
     setNewToDo({ ...newToDo, title: event.target.value });
   }
@@ -23,7 +22,7 @@ const ToDoContainer = () => {
           toDo.id === editingToDo.id ? { ...toDo, title: newToDo.title } : toDo
         );
         setToDos(updatedToDos);
-        setEditingToDo(null); // Скидаємо стан редагування
+        setEditingToDo(null); 
       } else {
         const newTodoWithId = { id: Date.now(), ...newToDo };
         setToDos([...toDos, newTodoWithId]);
@@ -45,7 +44,21 @@ const ToDoContainer = () => {
 
   function handleEdit(toDo) {
     setEditingToDo(toDo);
-    setNewToDo({ title: toDo.title }); // Встановлюємо назву завдання для редагування
+    setNewToDo({ title: toDo.title }); 
+  }
+
+  function handleSave(updatedToDo) {
+    const updatedToDos = toDos.map((toDo) =>
+      toDo.id === updatedToDo.id ? updatedToDo : toDo
+    );
+    setToDos(updatedToDos);
+    setEditingToDo(null); 
+    setNewToDo({ title: "" }); 
+  }
+
+  function handleCancel() {
+    setEditingToDo(null); 
+    setNewToDo({ title: "" }); 
   }
 
   const filteredToDos = toDos.filter((toDo) =>
@@ -54,7 +67,7 @@ const ToDoContainer = () => {
 
   return (
     <div>
-      <Loading isLoading={isLoading}  >
+      <Loading isLoading={isLoading}>
         <AddToDoComponent
           title={newToDo.title}
           onTitleChange={handleNewTitleChange}
@@ -68,8 +81,18 @@ const ToDoContainer = () => {
 
         {isLoading && <p>Loading...</p>}
 
-        {!isLoading && (
-          <ToDoTable toDos={filteredToDos} onDelete={handleDelete} onEdit={handleEdit} />
+        {!isLoading && editingToDo ? (
+          <ToDoEdit 
+            toDo={editingToDo} 
+            onSave={handleSave} 
+            onCancel={handleCancel} 
+          />
+        ) : (
+          <ToDoTable 
+            toDos={filteredToDos} 
+            onDelete={handleDelete} 
+            onEdit={handleEdit} 
+          />
         )}
       </Loading>
     </div>

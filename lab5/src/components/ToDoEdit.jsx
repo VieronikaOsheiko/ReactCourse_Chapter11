@@ -21,8 +21,8 @@ const ToDoEdit = ({ toDo, onSave, onCancel }) => {
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Edit ToDo Title"
       />
-      <button type="submit">Save</button>
-      <button type="button" onClick={onCancel}>Cancel</button>
+      <button className="save" type="submit">Save</button>
+      <button className="cancel" type="button" onClick={onCancel}>Cancel</button>
     </form>
   );
 };

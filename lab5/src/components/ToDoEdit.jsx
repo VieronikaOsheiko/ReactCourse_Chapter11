@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+/*import React, { useState } from "react";
 
 const ToDoEdit = ({ toDo, onSave, onCancel }) => {
   const [title, setTitle] = useState(toDo.title);
 
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
     if (title.trim() === "") {
       alert("Please enter a valid title.");
       return;
     }
-    const updatedToDo = { ...toDo, title };
-    onSave(updatedToDo);
-  }
+    onSave({ ...toDo, title });
+  };
 
   return (
     <form className="edit-todo-form" onSubmit={handleSubmit}>
@@ -28,3 +27,4 @@ const ToDoEdit = ({ toDo, onSave, onCancel }) => {
 };
 
 export default ToDoEdit;
+*/

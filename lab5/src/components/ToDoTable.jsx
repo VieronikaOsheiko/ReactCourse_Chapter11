@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import "../App.css";
 
 const ToDoTable = ({ toDos, onDelete, onEdit }) => {
   return (
@@ -12,17 +13,55 @@ const ToDoTable = ({ toDos, onDelete, onEdit }) => {
       </thead>
       <tbody>
         {toDos.map((toDo) => (
-          <tr key={toDo.id.toString()}>
-            <td>{toDo.id.toString()}</td>
-            <td>{toDo.title}</td>
-            <td>
-              <button className="delete-button" onClick={() => onDelete(toDo.id)}>Delete</button>
-              <button className="edit-button" onClick={() => onEdit(toDo)}>Edit</button>
-            </td>
-          </tr>
+          <ToDoRow
+            key={toDo.id}
+            toDo={toDo}
+            onDelete={onDelete}
+            onEdit={onEdit}
+          />
         ))}
       </tbody>
     </table>
+  );
+};
+
+const ToDoRow = ({ toDo, onDelete, onEdit }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [newTitle, setNewTitle] = useState(toDo.title);
+  const [error, setError] = useState("");
+
+  const handleEditClick = () => {
+    if (isEditing) {
+      if (newTitle.trim() === "") {
+        setError("Title is required.");
+        return;
+      }
+      setError("");
+      onEdit(toDo.id, newTitle);
+    }
+    setIsEditing(!isEditing);
+  };
+
+  return (
+    <tr>
+      <td>{toDo.id}</td>
+      <td>
+        {isEditing ? (
+          <input
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+            style={{ borderColor: error ? "red" : "black" }}
+          />
+        ) : (
+          toDo.title
+        )}
+        {error && <span style={{ color: "red" }}> {error}</span>}
+      </td>
+      <td>
+        <button onClick={handleEditClick}>{isEditing ? "Save" : "Edit"}</button>
+        <button onClick={() => onDelete(toDo.id)}>Delete</button>
+      </td>
+    </tr>
   );
 };
 
